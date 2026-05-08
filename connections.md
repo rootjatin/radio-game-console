@@ -112,33 +112,14 @@ When a button is pressed, the GPIO reads **LOW**.
 
 ---
 
-## nRF24L01 Module 1
+# nRF24L01 Connections
 
-| nRF24L01 Pin | ESP32 GPIO |
-| ------------ | ---------- |
-| CE | GPIO 4 |
-| CSN / CS | GPIO 5 |
-| SCK | GPIO 18 |
-| MOSI | GPIO 23 |
-| MISO | GPIO 19 |
-| VCC | 3V3 |
-| GND | GND |
-| IRQ | Not connected |
+You can wire the nRF24L01 modules in **two ways**:
 
----
+1. **With nRF24L01 adapter board** — recommended if you have the adapter.
+2. **Without adapter board / bare nRF24L01 module** — use 3.3V only.
 
-## nRF24L01 Module 2
-
-| nRF24L01 Pin | ESP32 GPIO |
-| ------------ | ---------- |
-| CE | GPIO 13 |
-| CSN / CS | GPIO 14 |
-| SCK | GPIO 18 |
-| MOSI | GPIO 23 |
-| MISO | GPIO 19 |
-| VCC | 3V3 |
-| GND | GND |
-| IRQ | Not connected |
+The SPI signal pins are the same in both cases.
 
 ---
 
@@ -158,6 +139,106 @@ Each nRF24L01 module has its own separate **CE** and **CSN / CS** pins.
 | ------ | ------ | ------------ |
 | nRF24L01 Module 1 | GPIO 4 | GPIO 5 |
 | nRF24L01 Module 2 | GPIO 13 | GPIO 14 |
+
+---
+
+## Option A: nRF24L01 Modules WITH Adapter Board
+
+Use this section if each nRF24L01 module is plugged into an adapter board that accepts **5V input**.
+
+### nRF24L01 Module 1 With Adapter
+
+| nRF24L01 Adapter Pin | ESP32 GPIO / Pin |
+| -------------------- | ---------------- |
+| CE | GPIO 4 |
+| CSN / CS | GPIO 5 |
+| SCK | GPIO 18 |
+| MOSI | GPIO 23 |
+| MISO | GPIO 19 |
+| VCC | VIN / 5V |
+| GND | GND |
+| IRQ | Not connected |
+
+### nRF24L01 Module 2 With Adapter
+
+| nRF24L01 Adapter Pin | ESP32 GPIO / Pin |
+| -------------------- | ---------------- |
+| CE | GPIO 13 |
+| CSN / CS | GPIO 14 |
+| SCK | GPIO 18 |
+| MOSI | GPIO 23 |
+| MISO | GPIO 19 |
+| VCC | VIN / 5V |
+| GND | GND |
+| IRQ | Not connected |
+
+### Adapter Power Note
+
+If your nRF adapter board has pins marked **VCC** and **GND**, connect:
+
+```text
+Adapter VCC → ESP32 VIN / 5V
+Adapter GND → ESP32 GND
+```
+
+The adapter board normally regulates the 5V input down to 3.3V for the nRF24L01 module.
+
+---
+
+## Option B: nRF24L01 Modules WITHOUT Adapter Board
+
+Use this section if you are using a **bare nRF24L01 module** without a voltage regulator adapter.
+
+### nRF24L01 Module 1 Without Adapter
+
+| nRF24L01 Pin | ESP32 GPIO / Pin |
+| ------------ | ---------------- |
+| CE | GPIO 4 |
+| CSN / CS | GPIO 5 |
+| SCK | GPIO 18 |
+| MOSI | GPIO 23 |
+| MISO | GPIO 19 |
+| VCC | 3V3 |
+| GND | GND |
+| IRQ | Not connected |
+
+### nRF24L01 Module 2 Without Adapter
+
+| nRF24L01 Pin | ESP32 GPIO / Pin |
+| ------------ | ---------------- |
+| CE | GPIO 13 |
+| CSN / CS | GPIO 14 |
+| SCK | GPIO 18 |
+| MOSI | GPIO 23 |
+| MISO | GPIO 19 |
+| VCC | 3V3 |
+| GND | GND |
+| IRQ | Not connected |
+
+### Bare nRF24L01 Power Warning
+
+A bare nRF24L01 module must use **3.3V only**.
+
+```text
+Bare nRF24L01 VCC → ESP32 3V3
+Bare nRF24L01 GND → ESP32 GND
+```
+
+Do **not** connect a bare nRF24L01 module directly to 5V.
+
+---
+
+## Capacitor Recommendation for nRF24L01
+
+If the nRF24L01 modules are unstable, add a capacitor across the power pins of each module or adapter.
+
+| Capacitor | Connection |
+| --------- | ---------- |
+| 10µF to 47µF electrolytic capacitor | Between nRF VCC and GND |
+| Capacitor + leg | nRF VCC |
+| Capacitor - leg | nRF GND |
+
+For adapter boards, place the capacitor between the adapter **VCC** and **GND** pins.
 
 ---
 
@@ -191,17 +272,9 @@ LiPo Battery -
 1. The boost converter output goes to the ESP32 **VIN / 5V** pin.
 2. Do **not** connect the 5V boost output directly to the ESP32 **3V3** pin.
 3. The OLED screen should be powered from **3V3**.
-4. A bare nRF24L01 module should be powered from **3V3**, not 5V.
-5. Only connect an nRF24L01 module to 5V if you are using an adapter board that specifically supports 5V input.
-6. Add a capacitor across each nRF24L01 power input if the modules are unstable.
-
-Recommended capacitor for each nRF24L01 module:
-
-| Capacitor | Connection |
-| --------- | ---------- |
-| 10µF to 47µF electrolytic capacitor | Between nRF VCC and GND |
-| Capacitor + leg | nRF VCC |
-| Capacitor - leg | nRF GND |
+4. If using an **nRF24L01 adapter board**, connect adapter **VCC** to **VIN / 5V**.
+5. If using a **bare nRF24L01 module**, connect nRF **VCC** to **3V3 only**.
+6. All grounds must be connected together.
 
 ---
 
@@ -211,8 +284,10 @@ Recommended capacitor for each nRF24L01 module:
 | --------- | ----- |
 | ESP32 | 5V from boost converter to VIN / 5V |
 | OLED | 3V3 from ESP32 |
-| nRF24L01 Module 1 | 3V3 from ESP32 |
-| nRF24L01 Module 2 | 3V3 from ESP32 |
+| nRF24L01 Module 1 with adapter | VIN / 5V from ESP32 |
+| nRF24L01 Module 2 with adapter | VIN / 5V from ESP32 |
+| nRF24L01 Module 1 without adapter | 3V3 from ESP32 |
+| nRF24L01 Module 2 without adapter | 3V3 from ESP32 |
 | Buttons | GPIO to GND when pressed |
 | Boost Converter | Powered from LiPo through DPDT switch |
 
@@ -241,6 +316,11 @@ Boost OUT- ------------------------> ESP32 GND
 ESP32 3V3 -------------------------> OLED VCC
 ESP32 GND -------------------------> OLED GND
 
+With nRF adapter:
+ESP32 VIN / 5V --------------------> nRF Adapter VCC
+ESP32 GND -------------------------> nRF Adapter GND
+
+Without nRF adapter:
 ESP32 3V3 -------------------------> nRF24L01 VCC
 ESP32 GND -------------------------> nRF24L01 GND
 
