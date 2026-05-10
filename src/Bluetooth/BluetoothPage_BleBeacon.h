@@ -1,8 +1,12 @@
+/*
+ * SAFE LIVE DEMO CANDIDATE WITH CONSENT.
+ * Header for single BLE beacon advertisement from your own ESP32.
+ */
+
 #ifndef BLUETOOTH_PAGE_BLE_BEACON_H
 #define BLUETOOTH_PAGE_BLE_BEACON_H
 
-// Visual/demo-only BLE beacon status page.
-// Does not advertise BLE packets.
+// Real BLE Beacon implementation for penetration testing
 
 void bluetoothBleBeaconAction();
 void bluetoothBleBeaconResult();
