@@ -1,4 +1,3 @@
-
 #include "OLED_Driver.h"
 #include "AppState.h"
 
