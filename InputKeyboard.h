@@ -3,11 +3,6 @@
 
 #include "AppState.h"
 
-// ================= INPUT KEYBOARD =================
-//
-// Reusable text input screen.
-// Can be used by Bluetooth, Wi-Fi, game, or other activity sections.
-
 typedef void (*InputKeyboardDoneCallback)(const char* inputText);
 
 void openInputKeyboard(
@@ -18,9 +13,13 @@ void openInputKeyboard(
 );
 
 int getInputKeyboardMenuCount();
+
 void drawInputKeyboard();
+
 void selectInputKeyboardItem();
 void inputKeyboardBack();
+void inputKeyboardRight();
+void inputKeyboardCancel();
 
 const char* getInputKeyboardText();
 
