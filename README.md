@@ -49,9 +49,9 @@ Do not use this project to disrupt, interfere with, or attack public or private 
 ## Project Image
 
 The console image is stored in the root directory of this repository:
-
+##  Repository structure
 ```text
-Repository structure
+
 console.jpeg
 Radio-game-console/
 ├── console.jpeg
