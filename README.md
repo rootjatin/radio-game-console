@@ -62,10 +62,11 @@ radio-network-testing-console/
 ```
 └── platformio.ini
 <br>
-Getting Started
-Clone this repository.
+## Getting Started
+```Clone this repository.
 Open the project in Arduino IDE or PlatformIO.
 Connect the ESP32 board.
 Install the required libraries.
 Upload the firmware to the ESP32.
 Use the console only in an authorized test environment.
+```
