@@ -51,4 +51,13 @@ Do not use this project to disrupt, interfere with, or attack public or private 
 The console image is stored in the root directory of this repository:
 
 ```text
+Repository structure
 console.jpeg
+Radio-game-console/
+├── console.jpeg
+├── README.md
+├── src/
+├── include/
+├── lib/
+```
+└── platformio.ini
