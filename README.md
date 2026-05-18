@@ -53,7 +53,7 @@ The console image is stored in the root directory of this repository:
 ```text
 
 console.jpeg
-Radio-game-console/
+radio-network-testing-console/
 ├── console.jpeg
 ├── README.md
 ├── src/
