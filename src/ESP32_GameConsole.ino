@@ -1,4 +1,3 @@
-
 #include <Wire.h>
 
 #include "AppState.h"
@@ -17,7 +16,6 @@
 #define BTN_RIGHT  26
 #define BTN_FIRE   27
 
-// Good value for physical push buttons
 #define DEBOUNCE_MS 50
 
 ScreenState currentScreen = SCREEN_MAIN;
@@ -107,9 +105,6 @@ void loop() {
 }
 
 // ================= BUTTON HANDLING =================
-//
-// This debounce system gives one clean press event.
-// Holding a button will not keep repeating automatically.
 
 bool buttonPressed(int pin) {
   for (int i = 0; i < buttonCount; i++) {
@@ -154,6 +149,7 @@ void handleButtons() {
     }
 
     drawCurrentScreen();
+    return;
   }
 
   if (buttonPressed(BTN_DOWN)) {
@@ -167,14 +163,27 @@ void handleButtons() {
     }
 
     drawCurrentScreen();
+    return;
   }
 
-  if (buttonPressed(BTN_FIRE) || buttonPressed(BTN_RIGHT)) {
-    selectCurrentItem();
+  if (buttonPressed(BTN_RIGHT)) {
+    if (currentScreen == SCREEN_INPUT_KEYBOARD) {
+      inputKeyboardRight();     // RIGHT = submit typed string
+    } else {
+      selectCurrentItem();      // RIGHT = OK on normal menus
+    }
+
+    return;
+  }
+
+  if (buttonPressed(BTN_FIRE)) {
+    selectCurrentItem();        // FIRE = add selected character on keyboard
+    return;
   }
 
   if (buttonPressed(BTN_LEFT)) {
-    goBack();
+    goBack();                   // LEFT = backspace on keyboard
+    return;
   }
 }
 
