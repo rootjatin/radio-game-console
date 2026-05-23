@@ -1,7 +1,4 @@
 # Radio Network Testing Console
-
-![Radio Network Testing Console](./console.jpeg)
-
 ## Overview
 
 Radio Network Testing Console is an ESP32-based 2.4 GHz wireless testing device designed for learning, experimentation, and authorized network-device testing.
