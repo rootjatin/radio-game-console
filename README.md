@@ -67,3 +67,5 @@ Install the required libraries.
 Upload the firmware to the ESP32.
 Use the console only in an authorized test environment.
 ```
+
+Bluetooth audit is more robust
