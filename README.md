@@ -1,8 +1,9 @@
 # Radio Network Testing Console
 ## Overview
 
-Radio Network Testing Console is an ESP32-based 2.4 GHz wireless testing device designed for learning, experimentation, and authorized network-device testing.
-
+Radio Network Testing Console is an ESP32-based 2.4 GHz wireless testing device designed for learning, experimentation, and authorized network-device testing in safe environment.<br>
+!!! Use at your own risk please !!!
+<br>
 This project uses an **ESP32** and **NRF24L01** module to help test and study wireless devices operating in the 2.4 GHz band, such as:
 
 - Wi-Fi devices
